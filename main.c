@@ -31,6 +31,26 @@ Cobra cobra;
 int jogoAtivo = 1;
 char nomeJogador[50];
 
+void iniciarJogo() {
+    printf("Digite seu nome: ");
+    scanf("%s", nomeJogador);
+
+    screenHideCursor();
+    keyboardInit();
+    timerInit(55);
+
+    cobra.comprimento = 1;
+    cobra.partes = (Ponto *)malloc(cobra.comprimento * sizeof(Ponto));
+    if (cobra.partes == NULL) {
+        printf("Erro ao alocar memória");
+        exit(EXIT_FAILURE);
+    }
+
+    cobra.partes[0].x = COLUNAS / 2;
+    cobra.partes[0].y = LINHAS / 2;
+}
+
 int main() {
+    iniciarJogo();
     return 0;
 }
