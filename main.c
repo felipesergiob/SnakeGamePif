@@ -68,8 +68,6 @@ void desenharLimites() {
     printf("┘");
 }
 
-
-
 int main() {
     iniciarJogo();
     desenharLimites();
