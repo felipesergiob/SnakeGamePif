@@ -50,7 +50,28 @@ void iniciarJogo() {
     cobra.partes[0].y = LINHAS / 2;
 }
 
+void desenharLimites() {
+    screenClear();
+    printf("┌");
+    for (int i = 0; i < COLUNAS; i++)
+        printf("─");
+    printf("┐\n");
+    for (int j = 0; j < LINHAS; j++) {
+        printf("│");
+        for (int i = 0; i < COLUNAS; i++)
+            printf(" ");
+        printf("│\n");
+    }
+    printf("└");
+    for (int i = 0; i < COLUNAS; i++)
+        printf("─");
+    printf("┘");
+}
+
+
+
 int main() {
     iniciarJogo();
+    desenharLimites();
     return 0;
 }
