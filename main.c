@@ -28,6 +28,7 @@ typedef struct {
 } Placar;
 
 Cobra cobra;
+Alimento comida;
 int jogoAtivo = 1;
 char nomeJogador[50];
 
@@ -76,8 +77,25 @@ void desenharJogo() {
     screenUpdate();
 }
 
+void criarComida() {
+    int valido;
+    do {
+        valido = 1;
+        comida.local.x = rand() % COLUNAS;
+        comida.local.y = rand() % LINHAS;
+
+        for (int i = 0; i < cobra.comprimento; i++) {
+            if (cobra.partes[i].x == comida.local.x && cobra.partes[i].y == comida.local.y) {
+                valido = 0;
+                break;
+            }
+        }
+    } while (!valido);
+}
+
 int main() {
     iniciarJogo();
+    criarComida();
     desenharLimites();
     desenharJogo();
     return 0;
