@@ -29,6 +29,8 @@ typedef struct {
 
 Cobra cobra;
 Alimento comida;
+int direcaoX = 1;
+int direcaoY = 0;
 int jogoAtivo = 1;
 char nomeJogador[50];
 
@@ -93,11 +95,44 @@ void criarComida() {
     } while (!valido);
 }
 
+
+
+void atualizarJogo() {
+    if (!jogoAtivo) return;
+
+    int novaX = (cobra.partes[0].x + direcaoX + COLUNAS) % COLUNAS;
+    int novaY = (cobra.partes[0].y + direcaoY + LINHAS) % LINHAS;
+
+    if (novaX == comida.local.x && novaY == comida.local.y) {
+        cobra.comprimento++;
+        cobra.partes = (Ponto *)realloc(cobra.partes, cobra.comprimento * sizeof(Ponto));
+        criarComida();
+    } else {
+        screenGotoxy(cobra.partes[cobra.comprimento - 1].x, cobra.partes[cobra.comprimento - 1].y);
+        printf(" ");
+    }
+
+    for (int i = cobra.comprimento - 1; i > 0; i--) {
+        cobra.partes[i] = cobra.partes[i - 1];
+    }
+
+    cobra.partes[0].x = novaX;
+    cobra.partes[0].y = novaY;
+}
+
 int main() {
     iniciarJogo();
     criarComida();
     desenharLimites();
     desenharJogo();
+
+    while (jogoAtivo) {
+        if (timerTimeOver()) {
+            atualizarJogo();
+            desenharJogo();
+        }
+    }
     return 0;
 }
+
 
