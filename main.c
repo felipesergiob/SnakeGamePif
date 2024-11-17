@@ -68,8 +68,18 @@ void desenharLimites() {
     printf("┘");
 }
 
+void desenharJogo() {
+    for (int i = 0; i < cobra.comprimento; i++) {
+        screenGotoxy(cobra.partes[i].x, cobra.partes[i].y);
+        printf("0");
+    }
+    screenUpdate();
+}
+
 int main() {
     iniciarJogo();
     desenharLimites();
+    desenharJogo();
     return 0;
 }
+
