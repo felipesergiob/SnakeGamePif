@@ -120,8 +120,13 @@ void atualizarJogo() {
     cobra.partes[0].y = novaY;
 }
 
+void salvarPlacar(int score);
+void carregarPlacares();
+void exibirPlacares();
+
 int main() {
     iniciarJogo();
+    carregarPlacares();
     criarComida();
     desenharLimites();
     desenharJogo();
@@ -151,5 +156,12 @@ int main() {
         }
     }
 
+    salvarPlacar(cobra.comprimento - 1);
+    exibirPlacares();
+    free(cobra.partes);
+    screenShowCursor();
+    keyboardDestroy();
+    timerDestroy();
     return 0;
 }
+
