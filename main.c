@@ -128,11 +128,28 @@ int main() {
 
     while (jogoAtivo) {
         if (timerTimeOver()) {
+            if (keyhit()) {
+                int tecla = readch();
+                if (tecla == 27 || tecla == 'q') {
+                    jogoAtivo = 0;
+                } else if (tecla == 'w' && direcaoY != 1) {
+                    direcaoX = 0;
+                    direcaoY = -1;
+                } else if (tecla == 'a' && direcaoX != 1) {
+                    direcaoX = -1;
+                    direcaoY = 0;
+                } else if (tecla == 's' && direcaoY != -1) {
+                    direcaoX = 0;
+                    direcaoY = 1;
+                } else if (tecla == 'd' && direcaoX != -1) {
+                    direcaoX = 1;
+                    direcaoY = 0;
+                }
+            }
             atualizarJogo();
             desenharJogo();
         }
     }
+
     return 0;
 }
-
-
