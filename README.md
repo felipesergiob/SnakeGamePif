@@ -39,5 +39,3 @@ Este projeto utiliza um **Makefile** para facilitar a compilação. Para compila
 2. **Compile o projeto** com o comando:
    ```bash
    make
-   Isso gerará um executável chamado snake_game
-   execute o jogo com: ./snake_game
