@@ -45,8 +45,8 @@ Este projeto utiliza um **Makefile** para facilitar a compilação. Para compila
 
 ## **Estrutura de Arquivos**
 
-1. **main.c** Arquivo principal contendo a lógica do jogo.
-2. **keyboard.c e keyboard.h** Gerenciam a entrada do teclado.
-3. **screen.c e screen.h** Manipulam a saída gráfica no terminal.
-4. **timer.c e timer.h** Controlam o temporizador para atualizações no jogo.
-5. **Makefile** Define regras de compilação para o projeto.
+- **main.c** Arquivo principal contendo a lógica do jogo.
+- **keyboard.c e keyboard.h** Gerenciam a entrada do teclado.
+- **screen.c e screen.h** Manipulam a saída gráfica no terminal.
+- **timer.c e timer.h** Controlam o temporizador para atualizações no jogo.
+- **Makefile** Define regras de compilação para o projeto.
