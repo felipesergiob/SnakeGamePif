@@ -39,3 +39,74 @@ Este projeto utiliza um **Makefile** para facilitar a compilação. Para compila
 2. **Compile o projeto** com o comando:
    ```bash
    make
+3. **Executar** com o comando:
+   ```bash
+   ./snake_game
+
+
+Entendido! Aqui está o README atualizado com todas as seções detalhadas que você solicitou:
+
+markdown
+Copiar código
+# Snake Game 🐍
+
+## **Descrição**
+Este é um jogo simples de "Cobra" desenvolvido em C, utilizando funcionalidades de manipulação de tela, teclado e temporização para criar uma experiência de jogo no terminal. O objetivo é controlar a cobra, coletar a comida representada por um asterisco (`*`) e crescer, evitando colidir com o próprio corpo.
+
+---
+
+## **Como Jogar**
+1. **Inicie o jogo:**
+   - Ao executar o programa, será solicitado que você insira seu nome. Após isso, o jogo começará.
+
+2. **Controles do Jogo:**
+   - Use as teclas `W`, `A`, `S`, `D` para mover a cobra:
+     - `W`: Para cima.
+     - `A`: Para a esquerda.
+     - `S`: Para baixo.
+     - `D`: Para a direita.
+   - Pressione `Q` ou `Esc` para sair do jogo.
+
+3. **Objetivo:**
+   - Colete a comida (`*`) para aumentar a pontuação e o comprimento da cobra.
+   - Evite colidir com o próprio corpo. Caso isso aconteça, o jogo terminará.
+
+4. **Ranking:**
+   - Após o fim do jogo, o placar é atualizado com as maiores pontuações e exibido na tela.
+
+---
+
+## **Requisitos**
+- **Compilador C**: GCC ou equivalente.
+- **Sistema Operacional**: Unix/Linux (compatível com o uso de ANSI escape codes para controle de tela e teclado).
+
+---
+
+## **Instruções de Compilação e Execução**
+Este projeto utiliza um **Makefile** para facilitar a compilação. Para compilar o jogo, siga os passos abaixo:
+
+1. **Certifique-se de que você possui o `make` e o compilador GCC instalados** no seu sistema. 
+   - No Linux, você pode instalar utilizando:
+     ```bash
+     sudo apt update
+     sudo apt install build-essential
+     ```
+2. **Abra o terminal** na pasta onde os arquivos do projeto estão localizados.
+3. **Compile o projeto** com o comando:
+   ```bash
+   make
+Executar: Após a compilação, execute o jogo com:
+
+bash
+Copiar código
+./snake_game
+Limpar (opcional): Após a execução, você pode limpar os arquivos intermediários gerados com:
+
+
+## **Estrutura de Arquivos**
+**main.c**: Arquivo principal contendo a lógica do jogo.
+**keyboard.c e keyboard.h**: Gerenciam a entrada do teclado.
+**screen.c e screen.h**: Manipulam a saída gráfica no terminal.
+**timer.c e timer.h**: Controlam o temporizador para atualizações no jogo.
+**Makefile**: Define regras de compilação para o projeto.
+
