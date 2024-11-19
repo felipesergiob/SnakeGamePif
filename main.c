@@ -33,6 +33,7 @@ int direcaoX = 1;
 int direcaoY = 0;
 int jogoAtivo = 1;
 char nomeJogador[50];
+Placar placares[MAX_SCORES];
 
 void iniciarJogo() {
     printf("Digite seu nome: ");
@@ -76,6 +77,9 @@ void desenharJogo() {
         screenGotoxy(cobra.partes[i].x, cobra.partes[i].y);
         printf("0");
     }
+    screenGotoxy(comida.local.x, comida.local.y);
+    printf("*");
+
     screenUpdate();
 }
 
@@ -95,8 +99,6 @@ void criarComida() {
     } while (!valido);
 }
 
-
-
 void atualizarJogo() {
     if (!jogoAtivo) return;
 
@@ -106,6 +108,10 @@ void atualizarJogo() {
     if (novaX == comida.local.x && novaY == comida.local.y) {
         cobra.comprimento++;
         cobra.partes = (Ponto *)realloc(cobra.partes, cobra.comprimento * sizeof(Ponto));
+        if (cobra.partes == NULL) {
+            printf("Erro ao realocar memória");
+            exit(EXIT_FAILURE);
+        }
         criarComida();
     } else {
         screenGotoxy(cobra.partes[cobra.comprimento - 1].x, cobra.partes[cobra.comprimento - 1].y);
@@ -118,11 +124,64 @@ void atualizarJogo() {
 
     cobra.partes[0].x = novaX;
     cobra.partes[0].y = novaY;
+
+    for (int i = 1; i < cobra.comprimento; i++) {
+        if (cobra.partes[i].x == novaX && cobra.partes[i].y == novaY) {
+            jogoAtivo = 0;
+        }
+    }
 }
 
-void salvarPlacar(int score);
-void carregarPlacares();
-void exibirPlacares();
+void salvarPlacar(int score) {
+    int i;
+    for (i = 0; i < MAX_SCORES; i++) {
+        if (score > placares[i].score) {
+            break;
+        }
+    }
+
+    if (i < MAX_SCORES) {
+        for (int j = MAX_SCORES - 1; j > i; j--) {
+            placares[j] = placares[j - 1];
+        }
+        placares[i].score = score;
+        strcpy(placares[i].nome, nomeJogador);
+
+        FILE *arquivo = fopen("scores.txt", "w");
+        if (arquivo != NULL) {
+            for (int k = 0; k < MAX_SCORES; k++) {
+                fprintf(arquivo, "%s %d\n", placares[k].nome, placares[k].score);
+            }
+            fclose(arquivo);
+        }
+    }
+}
+
+void carregarPlacares() {
+    FILE *arquivo = fopen("scores.txt", "r");
+    if (!arquivo) {
+        for (int i = 0; i < MAX_SCORES; i++) {
+            placares[i].score = 0;
+            strcpy(placares[i].nome, "N/A");
+        }
+    } else {
+        for (int i = 0; i < MAX_SCORES; i++) {
+            fscanf(arquivo, "%s %d", placares[i].nome, &placares[i].score);
+        }
+        fclose(arquivo);
+    }
+}
+
+void exibirPlacares() {
+    screenClear();
+    printf("=== Fim do Jogo ===\n");
+    printf("Jogador: %s\n", nomeJogador);
+    printf("Pontuação Final: %d ponto(s)\n\n", cobra.comprimento - 1);
+    printf("Ranking:\n");
+    for (int i = 0; i < MAX_SCORES; i++) {
+        printf("%d. %s - %d pontos\n", i + 1, placares[i].nome, placares[i].score);
+    }
+}
 
 int main() {
     iniciarJogo();
@@ -164,4 +223,3 @@ int main() {
     timerDestroy();
     return 0;
 }
-
