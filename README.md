@@ -39,7 +39,7 @@ Este projeto utiliza um **Makefile** para facilitar a compilação. Para compila
 2. **Compile o projeto** com o comando:
    ```bash
    make
-3. **Limpa os arquivos compilados** com o comando:
+3. **Limpa os arquivos compilados apos terminar de jogar** com o comando:
    ```bash
    make clean
 5. **Executar** com o comando:
